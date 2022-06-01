@@ -17,7 +17,7 @@ namespace MovieProNet6.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -222,29 +222,6 @@ namespace MovieProNet6.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MovieProNet6.Models.CustomCollection.Library", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CollectionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CollectionId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Library");
-                });
-
             modelBuilder.Entity("MovieProNet6.Models.Database.Collection", b =>
                 {
                     b.Property<int>("Id")
@@ -315,6 +292,7 @@ namespace MovieProNet6.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("TrailerUrl")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<float>("VoteAverage")
@@ -474,25 +452,6 @@ namespace MovieProNet6.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MovieProNet6.Models.CustomCollection.Library", b =>
-                {
-                    b.HasOne("MovieProNet6.Models.Database.Collection", "Collection")
-                        .WithMany()
-                        .HasForeignKey("CollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieProNet6.Models.Database.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Collection");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("MovieProNet6.Models.Database.MovieCast", b =>
