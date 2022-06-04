@@ -71,7 +71,6 @@ namespace MovieProNet6.Controllers
         public IActionResult Create()
         {
             ViewData["CollectionId"] = new SelectList(_context.Collection, "Id", "Name");
-
             return View();
         }
 
