@@ -26,7 +26,7 @@
 
 </style>
 
-@*Mathieu start*@
+@*Mathieu start
 <section class="px-4">
 
     <div class="row">
@@ -45,7 +45,7 @@
                     <div class="carousel-item @classText">
                       <div class="row">
                       
-                        @foreach (var movie in Model.CustomCollections.Skip(slide * 4).Take(4))
+                        @foreach (var movie in Model.MovieCollectionMy.Skip(slide * 4).Take(4))
                         {
                         <div class="col-sm-3 mb-2">
                             <div class="card" style="width: 18rem;">
@@ -70,7 +70,7 @@
     </div>
 
 </section>
-@*Mathieu end*@
+Mathieu end*@
 
 <section class="px-4">
 
@@ -84,7 +84,7 @@
         <div class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
               @{
-                classText = "active";
+                var classText = "active";
                 for (var slide = 0; slide <=3; slide++)
                 {
                     <div class="carousel-item @classText">

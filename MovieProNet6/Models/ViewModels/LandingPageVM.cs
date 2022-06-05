@@ -11,5 +11,8 @@ namespace MovieProNet6.Models.ViewModels
         public MovieSearch TopRated { get; set; }
         public MovieSearch Upcoming { get; set; }       
 
+        //Mathieu:
+
+        public List<Movie> MyMovies { get; set; }
     }
 }
