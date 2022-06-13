@@ -1,25 +1,20 @@
 ﻿let index = 0;
 
-function AddTag() {
+function AddMovie() {
     //Get a reference to the TagEntry input element
-    var tagEntry = document.getElementById("TagEntry");
+    var movieEntry = document.getElementById("MovieTMDBValues");
 
     //Lets use the new search funstion to help detect an error state
-    let searchResult = search(tagEntry.value);
+    let searchResult = search(movieEntry.value);
     if (searchResult != null) {
-        //Trigger my sweet alert for whatever condition is contained in the searchReslut var
-        swalWithDarkButton.fire({
-            html: `<span class='font-weight-bolder'>${searchResult.toUpperCase()}</span>`
-
-        });
+        alert("You select nothing")
     }
     else {
         //Create a new Select Option
-        let newOption = new Option(tagEntry.value, tagEntry.value);
-        document.getElementById("TagValues").options[index++] = newOption;
+        let newOption = new Option(movieEntry.value, movieEntry.value);
+        document.getElementById("MovieLibraryValues").options[index++] = newOption;
     }       
-    //Clear out the TagEntry control
-    tagEntry.value = "";
+    movieEntry.value = "";
     return true;
 }
 
@@ -86,13 +81,4 @@ function search(str) {
     }
 
 }
-
-const swalWithDarkButton = Swal.mixin({
-    customClass: {
-        confirmButton: 'btn btn-danger btn-sm btn-outline-dark'
-    },
-    imageUrl: '/images/oops.png',
-    timer: 3000,
-    buttonsStyling: false
-});
 
