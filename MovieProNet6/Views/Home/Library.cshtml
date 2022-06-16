@@ -2,28 +2,27 @@
     ViewData["Title"] = "Library";
 }
 <h1 class="mb-3">@ViewData["Title"]</h1>
-
- <div class="form-group">
-<div class="row">
-    <div class="col-12 col-sm-6">       
-       <h2>TMDB Movies</h2>
-       <select name="MovieTMDBValues" id="MovieTMDBValues" multiple class="form-select"></select>
-       <button onclick="AddMovie()" name="Add" type="button" class="btn btn-primary col-12 mt-3">Add</button>                     
-    </div>
-    <div class="col-12 col-sm-6">
-       <h2>All Collection Library</h2>
-       <select name="MovieLibraryValues" id="MovieLibraryValues" multiple class="form-select"></select>
-       <button onclick="DeleteMovie()" name="Delete" type="button" class="btn btn-danger col-12 mt-3">Delete</button>         
-    </div>
-</div>
-</div>
-
+ <form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-12 col-sm-6">       
+               <h2>TMDB Movies</h2>
+               <select name="MovieTMDBValues" id="MovieTMDBValues" multiple class="form-select"></select>
+               <button onclick="AddMovie()" name="Add" type="button" class="btn btn-primary col-12 mt-3">Add</button>                     
+            </div>
+            <div class="col-12 col-sm-6">
+               <h2>All Collection Library</h2>
+               <select name="MovieLibraryValues" id="MovieLibraryValues" multiple class="form-select"></select>
+               <button onclick="DeleteMovie()" name="Delete" type="button" class="btn btn-danger col-12 mt-3">Delete</button>         
+            </div>
+        </div>
+    </div> 
+</form>
 @section Scripts{
 
     <script>
     let movieLibraryValues = '@ViewData["MovieLibraryValues"]';
-    let movieTMDBValues = '@ViewData["MovieTMDBValues"]';   
-        
+    let movieTMDBValues = '@ViewData["MovieTMDBValues"]'; 
     </script>
 
     <script src="~/js/Custom.js"></script>
