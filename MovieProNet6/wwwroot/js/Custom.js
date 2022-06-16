@@ -44,11 +44,11 @@ $("form").on("submit", function () {
 })
 
 //Look for the tagValues variable to see if it has data
-if (MovieLibraryValues != '') {
-    let MovieLibraryArray = MovieLibraryValues.split(",");
+if (movieLibraryValues != '') {
+    let movieLibraryArray = movieLibraryValues.split(",");
     for (let loop = 0; loop < tagArray.length; loop++) {
         //Load up or Replace the options that we have
-        ReplaceTag(MovieLibraryArray[loop], loop);
+        ReplaceTag(movieLibraryArray[loop], loop);
         index++;
     }
 }

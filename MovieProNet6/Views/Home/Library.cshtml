@@ -3,6 +3,7 @@
 }
 <h1 class="mb-3">@ViewData["Title"]</h1>
 
+ <div class="form-group">
 <div class="row">
     <div class="col-12 col-sm-6">       
        <h2>TMDB Movies</h2>
@@ -14,6 +15,7 @@
        <select name="MovieLibraryValues" id="MovieLibraryValues" multiple class="form-select"></select>
        <button onclick="DeleteMovie()" name="Delete" type="button" class="btn btn-danger col-12 mt-3">Delete</button>         
     </div>
+</div>
 </div>
 
 @section Scripts{
