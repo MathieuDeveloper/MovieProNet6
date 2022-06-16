@@ -19,43 +19,43 @@ function AddMovie() {
 }
 
 function DeleteTag() {
-    let tagCount = 1;
-    let tagList = document.getElementById("TagValues");
-    if (!tagList) return false;
-    if (tagList.selectedIndex == -1) {
+    let movieCount = 1;
+    let movieList = document.getElementById("MovieLibraryValues");
+    if (!movieList) return false;
+    if (movieList.selectedIndex == -1) {
         swalWithDarkButton.fire({
             html: "<span class='font-weight-bolder'>CHOOSE A TAG BEFORE DELETING</span>"
         });
         return true;
     }
-    while (tagCount > 0) {               
-        if (tagList.selectedIndex >= 0) {
-            tagList.options[tagList.selectedIndex] = null;
-            --tagCount;
+    while (movieCount > 0) {               
+        if (movieList.selectedIndex >= 0) {
+            movieList.options[movie.selectedIndex] = null;
+            --movieCount;
         }
         else
-            tagCount = 0;
+            movieCount = 0;
         index--;
     }
 }
 
 $("form").on("submit", function () {
-    $("#TagValues option").prop("selected", "selected");
+    $("#MovieLibraryValues option").prop("selected", "selected");
 })
 
 //Look for the tagValues variable to see if it has data
-if (tagValues != '') {
-    let tagArray = tagValues.split(",");
+if (MovieLibraryValues != '') {
+    let MovieLibraryArray = MovieLibraryValues.split(",");
     for (let loop = 0; loop < tagArray.length; loop++) {
         //Load up or Replace the options that we have
-        ReplaceTag(tagArray[loop], loop);
+        ReplaceTag(MovieLibraryArray[loop], loop);
         index++;
     }
 }
 
-function ReplaceTag(tag, index) {
-    let newOption = new Option(tag, tag);
-    document.getElementById("TagList").options[index] = newOption;
+function ReplaceMovie(movie, index) {
+    let newOption = new Option(movie, movie);
+    document.getElementById("MovieList").options[index] = newOption;
 }
 
 
@@ -66,15 +66,15 @@ function ReplaceTag(tag, index) {
 
 function search(str) {
     if (str == "") {
-        return 'Empty tags are not permitted';
+        return 'You must choose a movie';
     }
     
-    var tagsEl = document.getElementById('TagValues');
-    if (tagsEl) {
-        let options = tagsEl.options;
+    var moviesEl = document.getElementById('MovieLibraryValues');
+    if (moviesEl) {
+        let options = moviesEl.options;
         for (let index = 0; index < options.length; index++) {
             if (options[index].value == str) {
-                return `The Tag #${str} was detected as a duplicate and not permitted`;
+                return `The Movie #${str} is already in the Library`;
             }
         }
         

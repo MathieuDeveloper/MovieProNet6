@@ -8,10 +8,22 @@
        <h2>TMDB Movies</h2>
        <select name="MovieTMDBValues" id="MovieTMDBValues" multiple class="form-select"></select>
        <button onclick="AddMovie()" name="Add" type="button" class="btn btn-primary col-12 mt-3">Add</button>                     
-     </div>
+    </div>
     <div class="col-12 col-sm-6">
        <h2>All Collection Library</h2>
        <select name="MovieLibraryValues" id="MovieLibraryValues" multiple class="form-select"></select>
        <button onclick="DeleteMovie()" name="Delete" type="button" class="btn btn-danger col-12 mt-3">Delete</button>         
     </div>
 </div>
+
+@section Scripts{
+
+    <script>
+    let movieLibraryValues = '@ViewData["MovieLibraryValues"]';
+    let movieTMDBValues = '@ViewData["MovieTMDBValues"]';   
+        
+    </script>
+
+    <script src="~/js/Custom.js"></script>
+
+}
