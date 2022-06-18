@@ -28,6 +28,9 @@ namespace MovieProNet6.Controllers
 
         public async Task<IActionResult> Import()
         {
+            //ViewData["Movie"] = Movie;
+            //var movies = _tmdbMovieService.SearchMoviesAsync(importMovie);
+            //return View(movies);
             var movies = await _context.Movie.ToListAsync();
             return View(movies);
         }
