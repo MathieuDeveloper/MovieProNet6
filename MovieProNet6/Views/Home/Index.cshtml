@@ -45,7 +45,7 @@
                     <div class="carousel-item @classText">
                       <div class="row">
                        
-                        @foreach (var movie in  Model.CustomCollections.Where(c => c.Name == "All").First().Skip(slide * 4).Take(4))
+                        @foreach (var movie in  Model.CustomCollections.Where(c => c.Name == "ALL").First().Skip(slide * 4).Take(4))
                         {
                         <div class="col-sm-3 mb-2">
                             <div class="card" style="width: 18rem;">
