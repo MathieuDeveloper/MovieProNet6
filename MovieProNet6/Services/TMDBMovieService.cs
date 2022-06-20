@@ -122,10 +122,10 @@ namespace MovieProNet6.Services
         {
 
             //Step 1: Setup a default instance of MovieSearch
-            MovieSearch movieSearch = new();
+            ImportMovie importMovie = new();
 
             //Step 2: Assemble the full request uri string
-            var query = $"{_appSettings.TMDBSettings.BaseUrl}/movie/{category}";
+            var query = $"{_appSettings.TMDBSettings.BaseUrl}/movie/{title}";
 
             var queryParams = new Dictionary<string, string>()
             {
@@ -144,14 +144,14 @@ namespace MovieProNet6.Services
             //Step 4: Return the MovieSearch object
             if (response.IsSuccessStatusCode)
             {
-                var dcjs = new DataContractJsonSerializer(typeof(MovieSearch));
+                var dcjs = new DataContractJsonSerializer(typeof(ImportMovie));
                 using var responseStream = await response.Content.ReadAsStreamAsync();
-                movieSearch = (MovieSearch)dcjs.ReadObject(responseStream);
-                movieSearch.results = movieSearch.results.Take(count).ToArray();
-                movieSearch.results.ToList().ForEach(r => r.poster_path = $"{_appSettings.TMDBSettings.BaseImagePath}/{_appSettings.MovieProSettings.DefaultPosterSize}/{r.poster_path}");
+                importMovie = (ImportMovie)dcjs.ReadObject(responseStream);
+                importMovie.results = importMovie.results.Take(count).ToArray();
+                importMovie.results.ToList().ForEach(r => r.poster_path = $"{_appSettings.TMDBSettings.BaseImagePath}/{_appSettings.MovieProSettings.DefaultPosterSize}/{r.poster_path}");
             }
 
-            return movieSearch;
+            return importMovie;
         }
 
     }
