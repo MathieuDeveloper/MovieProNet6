@@ -31,6 +31,7 @@ namespace MovieProNet6.Controllers
             //ViewData["Movie"] = Movie;
             //var movies = _tmdbMovieService.SearchMoviesAsync(importMovie);
             //return View(movies);
+
             var movies = await _context.Movie.ToListAsync();
             return View(movies);
         }
