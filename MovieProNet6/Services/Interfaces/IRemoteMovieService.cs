@@ -8,5 +8,8 @@ namespace MovieProNet6.Services.Interfaces
         Task<MovieDetail> MovieDetailAsync(int id);
         Task<MovieSearch> SearchMoviesAsync(MovieCategory category, int count);
         Task<ActorDetail> ActorDetailAsync(int id);
+
+        //Mathieu:
+        Task<MovieSearch> ImportMovieAsync(string title);
     }
 }

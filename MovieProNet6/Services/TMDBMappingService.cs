@@ -90,6 +90,79 @@ namespace MovieProNet6.Services
 
         }
 
+
+        //Mathieu
+        public async Task<Movie> MapImportMovieAsync(MovieDetail movie)
+        {
+            Movie newMovie = null;
+
+            try
+            {
+                newMovie = new Movie()
+                {
+                    MovieId = movie.id,
+                    Title = movie.title,
+                    TagLine = movie.tagline,
+                    Overview = movie.overview,
+                    RunTime = movie.runtime,
+                    VoteAverage = movie.vote_average,
+                    ReleaseDate = DateTime.Parse(movie.release_date),
+                    TrailerUrl = BuildTrailerPath(movie.videos),
+                    Backdrop = await EncodeBackdropImageAsync(movie.backdrop_path),
+                    BackdropType = BuildImageType(movie.backdrop_path),
+                    Poster = await EncodePosterImageAsync(movie.poster_path),
+                    PosterType = BuildImageType(movie.poster_path),
+                    Rating = GetRating(movie.release_dates),
+                };
+
+                var castMembers = movie.credits.cast.OrderByDescending(c => c.popularity)
+                    .GroupBy(c => c.cast_id)
+                    .Select(g => g.FirstOrDefault())
+                    .Take(20)
+                    .ToList();
+
+                castMembers.ForEach(member =>
+                {
+                    newMovie.Cast.Add(new MovieCast()
+                    {
+                        CastID = member.id,
+                        Departement = member.known_for_department,
+                        Name = member.name,
+                        Character = member.character,
+                        ImageUrl = BuildCastImage(member.profile_path),
+                    });
+                });
+
+                var crewMembers = movie.credits.crew.OrderByDescending(c => c.popularity)
+                    .GroupBy(c => c.id)
+                    .Select(g => g.First())
+                    .Take(20)
+                    .ToList();
+
+                crewMembers.ForEach(member =>
+                {
+                    newMovie.Crew.Add(new MovieCrew()
+                    {
+                        CrewID = member.id,
+                        Departement = member.department,
+                        Name = member.name,
+                        Job = member.job,
+                        ImageUrl = BuildCastImage(member.profile_path),
+
+                    });
+                });
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in MapMovieDetailAsync: {ex.Message}");
+            }
+
+            return newMovie;
+
+        }
+
         private string BuildCastImage(string profilePath)
         {
             if (string.IsNullOrEmpty(profilePath))
