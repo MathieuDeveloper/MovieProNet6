@@ -48,19 +48,52 @@ namespace MovieProNet6.Controllers
         }
 
 
-        //version Mathieu2:
+        ////version Mathieu2:
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Import(string title)
+        //{
+        //    var wantMovie = await _tmdbMovieService.ImportMovieAsync(title);
+
+        //    //If we already have this movie we can just warn the user instead of importing it again
+        //    if (_context.Movie.Any(m => m.Title == title))
+        //    {
+        //        var localMovie = await _context.Movie.FirstOrDefaultAsync(m => m.Title == title);
+        //        return RedirectToAction("Details", "Movies", new { title = localMovie.Title, local = true });
+        //    }
+
+
+        //    //Step 1  : Get the raw data from the API
+        //    var movieDetail = await _tmdbMovieService.ImportMovieAsync(title);
+
+        //    //Step 2  : Run the data through a mapping procedure
+        //    var movie = await _tmdbMappingService.MapMovieDetailAsync(movieDetail);
+
+        //    //Step 3 : Add the new movie
+        //    _context.Add(movie);
+        //    await _context.SaveChangesAsync();
+
+        //    //Step 4 : Assign it to the default All Collection
+        //    await AddToMovieCollection(movie.Id, _appSettings.MovieProSettings.DefaultCollection.Name);
+
+        //    return RedirectToAction("Import");
+
+        //}
+
+        //version CF:
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Import(string title)
+        public async Task<IActionResult> Import(int? id)
         {
+            ViewData["ImportMovie"] = id;
+
             //If we already have this movie we can just warn the user instead of importing it again
-            if (_context.Movie.Any(m => m.Title == title))
+            if (_context.Movie.Any(m => m.MovieId == id))
             {
-                var localMovie = await _context.Movie.FirstOrDefaultAsync(m => m.Title == title);
-                return RedirectToAction("Details", "Movies", new { title = localMovie.Title, local = true });
+                var localMovie = await _context.Movie.FirstOrDefaultAsync(m => m.MovieId == id);
+                return RedirectToAction("Details", "Movies", new { id = localMovie.Id, local = true });
             }
 
-            
             //Step 1  : Get the raw data from the API
             var movieDetail = await _tmdbMovieService.MovieDetailAsync(id);
 
@@ -77,35 +110,6 @@ namespace MovieProNet6.Controllers
             return RedirectToAction("Import");
 
         }
-
-        ////version CF:
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Import(int id)
-        //{
-        //    //If we already have this movie we can just warn the user instead of importing it again
-        //    if (_context.Movie.Any(m => m.MovieId == id))
-        //    {
-        //        var localMovie = await _context.Movie.FirstOrDefaultAsync(m => m.MovieId == id);
-        //        return RedirectToAction("Details", "Movies", new { id = localMovie.Id, local = true });
-        //    }
-
-        //    //Step 1  : Get the raw data from the API
-        //    var movieDetail = await _tmdbMovieService.MovieDetailAsync(id);
-
-        //    //Step 2  : Run the data through a mapping procedure
-        //    var movie = await _tmdbMappingService.MapMovieDetailAsync(movieDetail);
-
-        //    //Step 3 : Add the new movie
-        //    _context.Add(movie);
-        //    await _context.SaveChangesAsync();
-
-        //    //Step 4 : Assign it to the default All Collection
-        //    await AddToMovieCollection(movie.Id, _appSettings.MovieProSettings.DefaultCollection.Name);
-
-        //    return RedirectToAction("Import");
-
-        //}
 
         public async Task<IActionResult> Library()
         {

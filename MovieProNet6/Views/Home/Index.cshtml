@@ -96,6 +96,7 @@
                               <img src="@movie.poster_path" class="card-img-top" alt="movie image">
                               <div class="card-body">
                                 <h5 class="card-title clampTitle">@movie.title</h5>
+                                <p class="card-text clampOverview">@movie.id</p>
                                 <p class="card-text clampOverview">@movie.overview</p>
                                 <div class="d-grid gap-2">
                                 <a asp-action="Details" asp-controller="Movies" asp-route-id="@movie.id" class="btn btn-lg btn-warning font-weight-bold">Details</a>
