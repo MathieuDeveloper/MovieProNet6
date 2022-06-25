@@ -83,7 +83,7 @@ namespace MovieProNet6.Controllers
         //version CF:
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Import(int? id)
+        public async Task<IActionResult> Import(int id)
         {
             ViewData["ImportMovie"] = id;
 
