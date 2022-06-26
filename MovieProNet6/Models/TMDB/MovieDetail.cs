@@ -30,7 +30,7 @@
         public int vote_count { get; set; }
         public Images images { get; set; }
         public Videos videos { get; set; }
-        public Release_Dates release_dates { get; set; }
+        public string release_dates { get; set; }
         public Credits credits { get; set; }
     }
 
@@ -112,7 +112,7 @@
     public class ReleaseResult
     {
         public string iso_3166_1 { get; set; }
-        public Release_Date[] release_dates { get; set; }
+        public string release_dates { get; set; }
     }
 
     public class Release_Date
