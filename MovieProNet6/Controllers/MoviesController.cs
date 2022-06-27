@@ -35,7 +35,7 @@ namespace MovieProNet6.Controllers
         //    var movies = await _context.Movie.ToListAsync();
         //    return View(movies);
         //}
-
+        [HttpGet]
         public async Task<IActionResult> Import()
         {
            ////version Mathieu

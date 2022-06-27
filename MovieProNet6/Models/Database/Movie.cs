@@ -12,11 +12,11 @@ namespace MovieProNet6.Models.Database
         public string Title { get; set; }
         public string TagLine { get; set; } 
         public string Overview { get; set; }    
-        public int RunTime { get; set; }    
+        public int RunTime { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }   
+        public DateTime ReleaseDate { get; set; }
 
         public MovieRating Rating { get; set; }
         public float VoteAverage { get; set; }  
