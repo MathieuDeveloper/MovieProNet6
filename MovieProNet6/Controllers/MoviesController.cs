@@ -7,6 +7,7 @@ using MovieProNet6.Models.Database;
 using MovieProNet6.Models.Settings;
 using MovieProNet6.Services.Interfaces;
 
+
 namespace MovieProNet6.Controllers
 {
     public class MoviesController : Controller
@@ -38,9 +39,9 @@ namespace MovieProNet6.Controllers
         [HttpGet]
         public async Task<IActionResult> Import()
         {
-           ////version Mathieu
-           // var movies = await  _tmdbMovieService.ImportMovieAsync(title);
-           // return View(movies);
+            ////version Mathieu
+            // var movies = await  _tmdbMovieService.ImportMovieAsync(title);
+            // return View(movies);
 
             //version CF:
             var movies = await _context.Movie.ToListAsync();
@@ -85,7 +86,7 @@ namespace MovieProNet6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Import(int id)
         {
-            ViewData["ImportMovie"] = id;
+          
 
             //If we already have this movie we can just warn the user instead of importing it again
             if (_context.Movie.Any(m => m.MovieId == id))
