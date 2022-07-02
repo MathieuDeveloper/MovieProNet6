@@ -27,64 +27,22 @@ namespace MovieProNet6.Controllers
             _tmdbMappingService = tmdbMappingService;
         }
 
-        //public async Task<IActionResult> Import()
-        //{
-        //    //ViewData["Movie"] = Movie;
-        //    //var movies = _tmdbMovieService.SearchMoviesAsync(importMovie);
-        //    //return View(movies);
-
-        //    var movies = await _context.Movie.ToListAsync();
-        //    return View(movies);
-        //}
+        
         [HttpGet]
         public async Task<IActionResult> Import()
         {
-            ////version Mathieu
-            // var movies = await  _tmdbMovieService.ImportMovieAsync(title);
-            // return View(movies);
+           
 
             //version CF:
             var movies = await _context.Movie.ToListAsync();
             return View(movies);
         }
-
-
-        ////version Mathieu2:
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Import(string title)
-        //{
-        //    var wantedMovie = await _tmdbMovieService.ImportMovieAsync(title);
-
-        //    //If we already have this movie we can just warn the user instead of importing it again
-        //    if (_context.Movie.Any(m => m.Title == title))
-        //    {
-        //        var localMovie = await _context.Movie.FirstOrDefaultAsync(m => m.Title == title);
-        //        return RedirectToAction("Details", "Movies", new { title = localMovie.Title, local = true });
-        //    }
-
-
-        //    //Step 1  : Get the raw data from the API
-        //    var movieDetail = await _tmdbMovieService.ImportMovieAsync(title);
-
-        //    //Step 2  : Run the data through a mapping procedure
-        //    var movie = await _tmdbMappingService.MapMovieDetailAsync(movieDetail);
-
-        //    //Step 3 : Add the new movie
-        //    _context.Add(movie);
-        //    await _context.SaveChangesAsync();
-
-        //    //Step 4 : Assign it to the default All Collection
-        //    await AddToMovieCollection(movie.Id, _appSettings.MovieProSettings.DefaultCollection.Name);
-
-        //    return RedirectToAction("Import");
-
-        //}
+              
 
         //version CF:
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Import([Bind("id")]) Movie movie)
+        public async Task<IActionResult> Import(int id)
         {
           
 
@@ -112,12 +70,12 @@ namespace MovieProNet6.Controllers
 
         }
 
-        //Mathieu ? :
-        public async Task<IActionResult> Library()
-        {
-            var movies = await _context.Movie.ToListAsync();
-            return View(movies);
-        }
+        ////Mathieu ? :
+        //public async Task<IActionResult> Library()
+        //{
+        //    var movies = await _context.Movie.ToListAsync();
+        //    return View(movies);
+        //}
 
 
         // GET: Temp/Create
