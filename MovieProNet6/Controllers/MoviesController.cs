@@ -27,11 +27,18 @@ namespace MovieProNet6.Controllers
             _tmdbMappingService = tmdbMappingService;
         }
 
-        
-        [HttpGet]
-        public async Task<IActionResult> Import()
+
+        //Mathieu:
+        public async Task<IActionResult> ImportMovie()
         {
-           
+            var movie = await 
+        }
+
+
+
+            [HttpGet]
+        public async Task<IActionResult> Import()
+        {          
 
             //version CF:
             var movies = await _context.Movie.ToListAsync();
