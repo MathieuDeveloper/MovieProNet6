@@ -33,6 +33,9 @@ builder.Services.AddScoped<IRemoteMovieService, TMDBMovieService>();
 builder.Services.AddScoped<IDataMappingService, TMDBMappingService>();
 builder.Services.AddSingleton<IImageService, BasicImageService>();
 
+////Mathieu:
+//builder.Services.AddScoped<MovieSearchService>();
+
 var app = builder.Build();
 
 var dataService = app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedService>();

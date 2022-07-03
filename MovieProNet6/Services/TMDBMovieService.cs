@@ -120,7 +120,37 @@ namespace MovieProNet6.Services
         }
 
 
-               
+        //Mathieu:
+        public async Task<MovieDetail> MovieSearch(string title)
+        {
+            //Step 1: Setup default return object
+            MovieDetail movieDetail = new();
+
+            //Step 2: Assemble the request
+            var query = $"{_appSettings.TMDBSettings.BaseUrl}/movie/{title}";
+            var queryParams = new Dictionary<string, string>()
+            {
+                { "api_key", _appSettings.MovieProSettings.TmDbApiKey },
+                { "language", _appSettings.TMDBSettings.QueryOptions.Language},
+                { "append_to_response", _appSettings.TMDBSettings.QueryOptions.AppendToResponse}
+            };
+            var requestUri = QueryHelpers.AddQueryString(query, queryParams);
+
+            //Step 3: Create client and execute request
+            var client = _httpClient.CreateClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            var response = await client.SendAsync(request);
+
+            //Step 4: Deserialize into Moviedetail 
+            if (response.IsSuccessStatusCode)
+            {
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var dcjs = new DataContractJsonSerializer(typeof(MovieDetail));
+                movieDetail = dcjs.ReadObject(responseStream) as MovieDetail;
+            }
+            return movieDetail;
+        }
+        //fin Mathieu
 
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using MovieProNet6.Data;
 using MovieProNet6.Models.Database;
 using MovieProNet6.Models.Settings;
+using MovieProNet6.Services;
 using MovieProNet6.Services.Interfaces;
 
 
@@ -17,26 +18,30 @@ namespace MovieProNet6.Controllers
         private readonly IImageService _imageService;
         private readonly IRemoteMovieService _tmdbMovieService;
         private readonly IDataMappingService _tmdbMappingService;
+        //private readonly MovieSearchService _movieSearchService;
 
-        public MoviesController(IOptions<AppSettings> appSettings, ApplicationDbContext context, IImageService imageService, IRemoteMovieService tmdbMovieService, IDataMappingService tmdbMappingService)
+        public MoviesController(IOptions<AppSettings> appSettings, ApplicationDbContext context, IImageService imageService, IRemoteMovieService tmdbMovieService, IDataMappingService tmdbMappingService /*MovieSearchService movieSearchService*/)
         {
             _appSettings = appSettings.Value;
             _context = context;
             _imageService = imageService;
             _tmdbMovieService = tmdbMovieService;
             _tmdbMappingService = tmdbMappingService;
+            //_movieSearchService = movieSearchService;
         }
 
 
         //Mathieu:
-        public async Task<IActionResult> ImportMovie()
+        public async Task<IActionResult> SearchMyMovie(string importMovie)
         {
-            var movie = await 
+            ViewData["ImportMovie"] = importMovie;
+            var searchMovie = await _tmdbMovieService.MovieSearch(importMovie);
+            return View(searchMovie);
         }
 
+        //fin Mathieu
 
-
-            [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Import()
         {          
 
