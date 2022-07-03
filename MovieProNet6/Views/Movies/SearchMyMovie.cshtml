@@ -1,0 +1,18 @@
+﻿@using MovieProNet6.Models.TMDB
+@model MovieDetail
+
+@{
+    ViewData["Title"] = "Movies Import";
+}
+
+<form asp-controller="Movies" asp-action="SearchMyMovie">
+    <div class="input-group mt-5">
+        <input type="text" name="ImportMovie" class="form-control" placeholder="Import Movie">        
+        <button class="btn btn-outline-warning btn-sm ms-2" type="submit">Import</button>       
+    </div>
+</form>
+
+<script>alert(searchMovie)</script>
+<script>alert("My Alert")</script>
+<p>@searchMovie</p>
+<p>@MovieDetail</p>
