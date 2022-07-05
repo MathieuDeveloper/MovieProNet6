@@ -121,35 +121,43 @@ namespace MovieProNet6.Services
 
 
         //Mathieu:
-        public async Task<MovieDetail> MovieSearch(string title)
+        public async Task<MovieSearch> MovieSearching(string title)
         {
-            //Step 1: Setup default return object
-            MovieDetail movieDetail = new();
 
-            //Step 2: Assemble the request
+            //Step 1: Setup a default instance of MovieSearch
+            MovieSearch movieSearch = new();
+
+            //Step 2: Assemble the full request uri string
             var query = $"{_appSettings.TMDBSettings.BaseUrl}/movie/{title}";
+
             var queryParams = new Dictionary<string, string>()
             {
                 { "api_key", _appSettings.MovieProSettings.TmDbApiKey },
-                { "language", _appSettings.TMDBSettings.QueryOptions.Language},
-                { "append_to_response", _appSettings.TMDBSettings.QueryOptions.AppendToResponse}
+                { "language", _appSettings.TMDBSettings.QueryOptions.Language },
+                { "page", _appSettings.TMDBSettings.QueryOptions.Page }
             };
+
             var requestUri = QueryHelpers.AddQueryString(query, queryParams);
 
-            //Step 3: Create client and execute request
+            //Step 3: Create a client and execute the request
             var client = _httpClient.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await client.SendAsync(request);
 
-            //Step 4: Deserialize into Moviedetail 
+            //Step 4: Return the MovieSearch object
             if (response.IsSuccessStatusCode)
             {
+                var dcjs = new DataContractJsonSerializer(typeof(MovieSearch));
                 using var responseStream = await response.Content.ReadAsStreamAsync();
-                var dcjs = new DataContractJsonSerializer(typeof(MovieDetail));
-                movieDetail = dcjs.ReadObject(responseStream) as MovieDetail;
+                movieSearch = (MovieSearch)dcjs.ReadObject(responseStream);
+                movieSearch.results = movieSearch.results.ToArray();
+                movieSearch.results.ToList().ForEach(r => r.poster_path = $"{_appSettings.TMDBSettings.BaseImagePath}/{_appSettings.MovieProSettings.DefaultPosterSize}/{r.poster_path}");
             }
-            return movieDetail;
+
+            return movieSearch;
         }
+
+
         //fin Mathieu
 
     }

@@ -1,5 +1,9 @@
-﻿@using MovieProNet6.Models.TMDB
-@model MovieDetail
+﻿@*tout Mathieu*@
+
+@using MovieProNet6.Models.TMDB
+@using MovieProNet6.Models.Database
+@using MovieProNet6.Models.ViewModels
+@model Movie
 
 @{
     ViewData["Title"] = "Movies Import";
@@ -12,7 +16,8 @@
     </div>
 </form>
 
-<script>alert(searchMovie)</script>
-<script>alert("My Alert")</script>
-<p>@searchMovie</p>
-<p>@MovieDetail</p>
+
+
+<p>@Model.Title</p>
+
+@*<p>@MovieDetail</p>*@
