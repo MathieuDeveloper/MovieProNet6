@@ -31,15 +31,15 @@ namespace MovieProNet6.Controllers
         }
 
 
-        //Mathieu:
-        public async Task<IActionResult> SearchMyMovie(string importMovie)
-        {
-            ViewData["ImportMovie"] = importMovie;
-            var searchMovie = await _tmdbMovieService.MovieSearching(importMovie);
-            return View(searchMovie);
-        }
+        ////Mathieu:
+        //public async Task<IActionResult> SearchMyMovie(string importMovie)
+        //{
+        //    ViewData["ImportMovie"] = importMovie;
+        //    var searchMovie = await _tmdbMovieService.MovieSearching(importMovie);
+        //    return View(searchMovie);
+        //}
 
-        //fin Mathieu
+        ////fin Mathieu
 
         [HttpGet]
         public async Task<IActionResult> Import()
