@@ -13,7 +13,7 @@ namespace MovieProNet6.Services.Interfaces
 
         ////Mathieu:
 
-        Task<MovieDetail> MovieSearch(string title);
+        //Task<MovieDetail> MovieSearch(string title);
 
 
         //Task<MovieSearch> ImportMovieAsync(string title);
