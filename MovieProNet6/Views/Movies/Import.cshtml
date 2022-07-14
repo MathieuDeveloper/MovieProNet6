@@ -10,8 +10,30 @@
 
 <form asp-controller="Movies" asp-action="Import">
     <div class="input-group mt-5">
-        <input type="text" id="my_search" name="search" autocomplete="off" />
+        <div id="remote">
+          <input class="typeahead" type="text" placeholder="Movie">
+        </div>
         @*<input type="text" name="ImportMovie" class="form-control" placeholder="Import Movie">*@        
         <button class="btn btn-outline-warning btn-sm ms-2" type="submit">Import</button>       
     </div>
 </form>
+
+
+<script>
+
+    var bestPictures = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  remote: {
+    url: '../data/films/queries/%QUERY.json',
+    wildcard: '%QUERY'
+  }
+});
+
+$('#remote .typeahead').typeahead(null, {
+  name: 'best-pictures',
+  display: 'value',
+  source: bestPictures
+});
+
+</script>
