@@ -25,7 +25,7 @@
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   remote: {
-    url: '../data/films/queries/%QUERY.json',
+    url: 'https://api.themoviedb.org/3/search/movie?api_key=06c5d7152a9119d9afbc2813da1ff6ed&query=%QUERY.json',
     wildcard: '%QUERY'
   }
 });
@@ -37,3 +37,9 @@ $('#remote .typeahead').typeahead(null, {
 });
 
 </script>
+
+<script>alert(QUERY.json);</script>
+
+
+@*<script src="js/site.js"></script>
+<script>document.getElementById("btnSubmit").addEventListener("click",getValue);</script>*@
